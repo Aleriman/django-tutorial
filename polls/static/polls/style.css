@@ -1,3 +1,13 @@
 li a {
     color: green;
+    font-size:30px;
 }
+body {
+    background: white url("images/6.gif") no-repeat;
+}
+ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+

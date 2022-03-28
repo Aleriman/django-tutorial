@@ -6,6 +6,23 @@ from django.utils import timezone
 
 from .models import Choice, Question
 
+def pie_chart(request, question_id):
+    labels = []
+    data = []
+    #queryset = Question.objects.get(id=question_id).choice_set.all()
+    #q = Question.objects.get(id=question_id)
+    #queryset = Choice.objects.filter(question = q)
+    
+    queryset = Choice.objects.filter(question__id=question_id)
+    
+    for choice in queryset:
+        labels.append(choice.choice_text)
+        data.append(choice.votes)
+    return render(request, 'polls/pie_chart.html', {
+        'labels': labels,
+        'data': data,
+    	})
+
 class IndexView(generic.ListView):
 	template_name = 'polls/index.html'
 	context_object_name = 'latest_question_list'

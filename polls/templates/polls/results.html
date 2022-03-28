@@ -1,3 +1,7 @@
+<html>
+<head>
+</head>
+<body>
 <h1>{{ question.question_text }}</h1>
 
 <ul>
@@ -5,5 +9,7 @@
 	<li>{{ choice.choice_text }} -- {{choice.votes}} vote{{ choice.votes|pluralize }}</li>
 	{% endfor %}
 </ul>
-
 <a href="{% url 'polls:detail' question.id %}">¿Votar de nuevo?</a>
+<a href="{% url 'polls:pie_chart' question.id %}">Ver detalles</a>
+</body>
+</html>

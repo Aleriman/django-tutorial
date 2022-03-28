@@ -8,6 +8,13 @@ from django.urls import reverse
 
 from .models import Question
 
+def create_question(question_text, days):
+    		"""
+    		Creamos una pregunta con el texto dado y publicado con el numero otorgado
+    		"""
+    		time = timezone.now() + datetime.timedelta(days=days)
+    		return Question.objects.create(question_text=question_text, pub_date=time)
+
 
 class QuestionModelTests(TestCase):
 
@@ -28,13 +35,6 @@ class QuestionModelTests(TestCase):
 		time = timezone.now() - datetime.timedelta(hours=23, minutes=59, seconds=59)
 		recent_question = Question(pub_date=time)
 		self.assertIs(recent_question.was_published_recently(self))
-
-	def create_question(question_text, days):
-    		"""
-    		Creamos una pregunta con el texto dado y publicado con el numero otorgado
-    		"""
-    		time = timezone.now() + datetime.timedelta(days=days)
-    		return Question.objects.create(question_text=question_text, pub_date=time)
 
 class QuestionIndexViewTests(TestCase):
 
@@ -105,7 +105,7 @@ class QuestionDetailViewTests(TestCase):
 	        """
         	Los detalles de la pregunta con una fecha pasada mostraran el texto de la pregunta
         	"""
-        	past_question = create_question(question_text='Past Question.', days=-5)
+        	past_question = create_question(question_text='Past Question.', days=-1000)
         	url = reverse('polls:detail', args=(past_question.id,))
         	response = self.client.get(url)
         	self.assertContains(response, past_question.question_text)

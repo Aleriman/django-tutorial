@@ -1,9 +1,14 @@
+<!DOCTYPE html>
 <html>
+<head>
+<title>Pregunta</title>
+</head>
 {% load static %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
 
-<body>
+<body align = center>
+<h1 style="color:green;">Preguntas más recientes</h1>
 {% if latest_question_list %}
 
     <ul>
